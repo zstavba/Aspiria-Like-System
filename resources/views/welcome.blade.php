@@ -18,7 +18,7 @@
         <!-- Scripts -->
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>        
     </head>
-    <body class="bg-white dark:bg-gray-100" ng-controller="IndexController" ng-init="init()">
+    <body class="bg-gray-100" ng-controller="IndexController" ng-init="init()">
         
     </body>
 </html>
