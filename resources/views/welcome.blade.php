@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" ng-app="aspiria">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
         <!-- Scripts -->
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>        
     </head>
-    <body class="bg-white dark:bg-gray-100">
+    <body class="bg-white dark:bg-gray-100" ng-controller="IndexController" ng-init="init()">
         
     </body>
 </html>
