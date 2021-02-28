@@ -13,7 +13,15 @@ class UserSettings extends Migration
      */
     public function up()
     {
-        //
+        Schema::create("user_settings",function(Blueprint $table){
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->text("profile_image")->nullable();
+            $table->text("phone_number")->nullable();
+            $table->text("adresss")->nullable(); 
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class UserSettings extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop("user_settings");
     }
 }

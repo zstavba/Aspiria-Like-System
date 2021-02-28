@@ -13,7 +13,17 @@ class Likes extends Migration
      */
     public function up()
     {
-        //
+        Schema::create("likes",function(Blueprint $table){
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('image_id');
+            $table->foreign('image_id')->references('id')->on('images');
+            $table->string("like_type")->nullable();
+            $table->integer("thumbs_up")->nullable();
+            $table->integer("thumbs_down")->nullable();
+            $table->timestamp();
+        });
     }
 
     /**
@@ -23,6 +33,6 @@ class Likes extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop("likes");
     }
 }

@@ -13,7 +13,14 @@ class Album extends Migration
      */
     public function up()
     {
-        //
+        Schema::create("album",function(Blueprint $table){
+            $tbale->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string("name")->nullable();
+            $table->string("type")->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class Album extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop("album");
     }
 }

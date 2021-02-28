@@ -13,7 +13,15 @@ class Images extends Migration
      */
     public function up()
     {
-        //
+        Schema::create("images",function(Blueprint $tables){
+            $table->id();
+            $table->unsignedBigInteger('album_id');
+            $table->foreign('album_id')->references('id')->on('album');
+            $table->string("name")->nullable();
+            $table->string("type")->nullable();
+            $table->string("size")->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class Images extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop("images");
     }
 }
