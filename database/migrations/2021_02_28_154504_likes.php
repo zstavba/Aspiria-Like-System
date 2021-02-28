@@ -22,7 +22,7 @@ class Likes extends Migration
             $table->string("like_type")->nullable();
             $table->integer("thumbs_up")->nullable();
             $table->integer("thumbs_down")->nullable();
-            $table->timestamp();
+            $table->timestamps();
         });
     }
 

@@ -13,7 +13,7 @@ class Images extends Migration
      */
     public function up()
     {
-        Schema::create("images",function(Blueprint $tables){
+        Schema::create("images",function(Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('album_id');
             $table->foreign('album_id')->references('id')->on('album');
