@@ -30,4 +30,16 @@ aspiria.controller("IndexController",function($scope, $http, $compile, $location
 
 	}
 
+
+	$scope.login = () => {
+
+
+	}
+
+
+	$scope.register =  () => {
+		
+		
+	}
+
 });

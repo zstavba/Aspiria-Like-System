@@ -1860,6 +1860,10 @@ aspiria.config(function ($routeProvider, $locationProvider) {
 });
 aspiria.controller("IndexController", function ($scope, $http, $compile, $location, $interval) {
   $scope.init = function () {};
+
+  $scope.login = function () {};
+
+  $scope.register = function () {};
 });
 
 /***/ }),
