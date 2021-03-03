@@ -19,7 +19,7 @@
 	  </div>
 	</div>
 	<div class="grid grid-cols-2 gap-4">
-	  <div class=" bg-red-100 ">
+	  <div>
 			<div class="flex mt-6">
 			  <label class="flex items-center pr-6">
 			    <input type="checkbox" class="form-checkbox">
@@ -28,7 +28,7 @@
 			</div>
 	  </div>
 	  <!-- ... -->
-	  <div class="text-right pt-6 bg-red-100 ">
+	  <div class="text-right pt-6">
 	  	 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
 	  	 	Pozabil sem geslo
 	  	 </button>
