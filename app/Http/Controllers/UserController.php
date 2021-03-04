@@ -4,14 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+
 use App\Models\User;
+
 
 class UserController extends Controller
 {
     
 
     public function login(){
-      $messages = [
+		$user = User::where("username",\Request::get("username"))->first();
+
+		if(empty($user)){
+			return response()->json([
+				"message" => [
+					"text" => "Uporabnika ni bilo mogoče poiskati. Ste prepričani, da ste registstrirani v sistem.",
+					"time" => date("H:i")
+				]
+			],400);
+		}
+
+
+		if($user->status_active == 0){
+			return response()->json([
+				"message" => [
+					"text" => "Preden se prijavite v sistem morate aktivirati račun.",
+					"time" => date("H:i")
+				]
+			],400);
+		}
+
+
+		$messages = [
             "username.required" => "Uporabniško ime je priporočeno !",
             "password.required" => "Prosimo vas, da vnesete vaše geslo"
         ];
@@ -47,6 +72,7 @@ class UserController extends Controller
 		$user = new User();
 		$user->name = \Request::get("name");
 		$user->email = \Request::get("email");
+		$user->username = \Request::get("username");
 		/* Adding bcrypt to the password for hasing */
 		$user->password = bcrypt(\Request::get("password"));
 
