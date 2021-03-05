@@ -53,14 +53,20 @@
                   <img class="hidden lg:block h-8 w-auto" src="https://aspiria.ca/wp-content/uploads/2019/04/AspiriaLogo_Since2003_English.png" alt="Workflow">
                 </div>
               </div>
+              @if(Auth::check())
+              <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <a href="{{ url('/') }}/#!/prijava" class="text-gray-800 transition duration-500 ease-in mr-2 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Slike</a>
+              </div>
+              @else
               <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <a href="{{ url('/') }}/#!/prijava" class="text-gray-800 transition duration-500 ease-in mr-2 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Prijava</a>
                 <a href="{{ url('/') }}/#!/registracija" class="text-gray-800 transition duration-500 ease-in mr-2 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Registracija</a>
               </div>
+              @endif
             </div>
           </div>
         </nav>
-  
+
         <div ng-view></div>
     </body>
 </html>

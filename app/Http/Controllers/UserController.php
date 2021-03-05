@@ -100,5 +100,22 @@ class UserController extends Controller
 	}
 
 
+	public function list() : array{
+
+	}
+
+
+	public function info($user_id) : array {
+
+	}
+
+	public function sendMail(User $user){
+
+	}
+
+	
+
+
+
 
 }
