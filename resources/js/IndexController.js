@@ -17,7 +17,18 @@ aspiria.config(function($routeProvider,$locationProvider) {
     templateUrl : angular.element(this).scope.url+"/register",
     controller: "IndexController"
   });
-
+   $routeProvider.when("/clani", {
+    templateUrl : angular.element(this).scope.url+"/members",
+    controller: "IndexController"
+  });
+   $routeProvider.when("/privat_slike", {
+    templateUrl : angular.element(this).scope.url+"/private/images",
+    controller: "IndexController"
+  });
+   $routeProvider.when("/vse_slike", {
+    templateUrl : angular.element(this).scope.url+"/all/images",
+    controller: "IndexController"
+  });
 });
 
 
@@ -57,6 +68,10 @@ aspiria.controller("IndexController",function($scope, $http, $compile, $location
 		}).then(
 			function success(response){
 				$scope.message("bg-green-100",response.data["message"]);
+
+				setTimeout(function(){
+					window.location.href =  angular.element(this).scope.url;
+				},2000);
 			},
 			function error(response){
 				$scope.message("bg-red-200",response.data["message"]);
@@ -86,6 +101,39 @@ aspiria.controller("IndexController",function($scope, $http, $compile, $location
 			}
 
 		);
+	}
+
+	$scope.openModal = () => {
+		const modal = document.querySelector('.modal');
+		modal.classList.toggle('opacity-0')
+		modal.classList.toggle('pointer-events-none')
+	}
+	$scope.closeModal = () => {
+		const modal = document.querySelector('.modal');
+		modal.classList.toggle('opacity-0')
+		modal.classList.toggle('pointer-events-none')
+	}
+
+
+	$scope.logout = () => {
+		$http({
+			method:"GET",
+			url: angular.element(this).scope.url+"/api/user/logout"
+		}).then(
+			function success(response){
+				$scope.message("bg-green-100",response.data["message"]);
+
+				setTimeout(function(){
+					window.location.href = angular.element(this).scope.url;
+				},2000);
+			},
+			function error(response){
+
+			}
+
+		)
+
+
 	}
 
 });

@@ -107,16 +107,60 @@ class UserController extends Controller
 
 
 	public function list() : array{
+		$users = User::select('*')->get();
+
+
+		if(empty($users)){
+			return [
+				"message" => [
+					"text" => "Na seznamu trenutno ni dobenega uporabnika"
+				]
+			];
+		}
+
+
+		$array[] = (array) $users->all();
+
+
+		return $array;
+
 
 	}
 
 
 	public function info($user_id) : array {
+		$user = User::find($user_id);
 
+		if(empty($user)){
+			$data = [
+				"message" => [
+					"text" => "Iskanega uporabnika ni bilo mogočenajti. Ste prepričani, da ste prijavljeni v sistem."
+				]
+			];
+
+			return $data;
+		}
+
+
+		$array[] = (array) $user->all();
+	
+		return $array;
 	}
 
 	public function sendMail(User $user){
 
+	}
+
+
+	public function logout(){
+		Auth::logout();
+
+		return response()->json([
+			"message" => [
+				"text" => "Odjava je bila uspešna, kmalu boste preusmerjeni na domačo stran.",
+				"time" =>  date("H:i")
+			]
+		],200);
 	}
 
 

@@ -30,4 +30,16 @@ class Controller extends BaseController
     }
 
 
+    public function private_images(){
+        return view('user/private_images');
+    }
+
+    public function all_images(){
+        return view("user/all_images");
+    }
+
+    public function members(){
+        return view("user/members");
+    }
+
 }

@@ -13,7 +13,7 @@
       </button>
     </div>
     <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none p-4" tabindex="0">
- 		Index Page
+ 		Private Images Page
     </main>
   </div>
 </div>
