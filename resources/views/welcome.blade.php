@@ -50,13 +50,34 @@
               </div>
               <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="flex-shrink-0 flex items-center">
-                  <img class="hidden lg:block h-8 w-auto" src="https://aspiria.ca/wp-content/uploads/2019/04/AspiriaLogo_Since2003_English.png" alt="Workflow">
+                  <a href="{{ url('/') }}/#!/">
+                    <img class="hidden lg:block h-8 w-auto" src="https://aspiria.ca/wp-content/uploads/2019/04/AspiriaLogo_Since2003_English.png" alt="Workflow">
+                  </a>
                 </div>
               </div>
               @if(Auth::check())
-              <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <a href="{{ url('/') }}/#!/prijava" class="text-gray-800 transition duration-500 ease-in mr-2 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Slike</a>
-              </div>
+                <button type="button" class="inline-flex items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-3">
+                <!-- Heroicon name: solid/plus -->
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+              </button>
+                <a href="#" class="flex-shrink-0 group block">
+                  <div class="flex items-center">
+                    <div>
+                      <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=GjrNmFhAQ3&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                        Tom Cook
+                      </p>
+                      <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                        View profile
+                      </p>
+                    </div>
+                  </div>
+                </a>
+
               @else
               <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <a href="{{ url('/') }}/#!/prijava" class="text-gray-800 transition duration-500 ease-in mr-2 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Prijava</a>

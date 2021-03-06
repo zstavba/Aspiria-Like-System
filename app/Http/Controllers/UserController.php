@@ -56,13 +56,19 @@ class UserController extends Controller
         if(Auth::attempt($inputs)){
             Auth::login(Auth::user());
             return response()->json([
-                "message" => "Prijava je bila uspešna. Čez nekaj sekund boste preusmerjeni v vašo časovnico."
+                "message" => [
+                	"text" => "Prijava je bila uspešna. Čez nekaj sekund boste preusmerjeni v vašo časovnico.",
+                	"time" => date("H:i")
+                ]
             ],200);
         }
 
 
         return response()->json([
-            "message" => "Vnesli ste napačne podatke. V primeru, če niste naš član prosimo vas, da ustvarite nov račun."
+            "message" => [
+            	"text" => "Vnesli ste napačne podatke. V primeru, če niste naš član prosimo vas, da ustvarite nov račun.",
+            	"time" => date("H:i")
+            ]
         ],400);
     }
 
@@ -113,7 +119,7 @@ class UserController extends Controller
 
 	}
 
-	
+
 
 
 

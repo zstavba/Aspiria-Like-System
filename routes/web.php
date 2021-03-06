@@ -18,5 +18,5 @@ Route::get('/', [Controller::class, 'index']);
 
 
 Route::get('/home', [Controller::class, 'home']);
-Route::get('/login', [Controller::class, 'login']);
-Route::get('/register', [Controller::class, 'register']);
+Route::get('/login', [Controller::class, 'login'])->middleware('guest');
+Route::get('/register', [Controller::class, 'register'])->middleware('guest');;
