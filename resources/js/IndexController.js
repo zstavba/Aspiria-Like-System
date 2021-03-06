@@ -36,8 +36,13 @@ aspiria.config(function($routeProvider,$locationProvider) {
 
 aspiria.controller("IndexController",function($scope, $http, $compile, $location,$interval){
 
-	$scope.init = () => {
-		
+	$scope._user_id = 0;
+
+	$scope.init = ($user_id = null) => {
+		$scope._user_id = $user_id;
+
+
+		$scope.getInfo();
 
 	}
 
@@ -132,7 +137,22 @@ aspiria.controller("IndexController",function($scope, $http, $compile, $location
 			}
 
 		)
+	}
 
+
+	$scope.getInfo  = () => {
+		$http({
+			method:"GET",
+			url: angular.element(this).scope.url+"/api/user/info/"+$scope._user_id
+		}).then(
+			function success(response){
+				$scope.user_info = response.data["user"];
+			},
+			function error(response){
+
+			}
+
+		)
 
 	}
 

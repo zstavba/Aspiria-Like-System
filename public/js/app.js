@@ -1873,7 +1873,13 @@ aspiria.config(function ($routeProvider, $locationProvider) {
 aspiria.controller("IndexController", function ($scope, $http, $compile, $location, $interval) {
   var _this = this;
 
-  $scope.init = function () {};
+  $scope._user_id = 0;
+
+  $scope.init = function () {
+    var $user_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    $scope._user_id = $user_id;
+    $scope.getInfo();
+  };
 
   $scope.message = function (error_type, message) {
     $('.system_message').addClass(error_type);
@@ -1942,6 +1948,15 @@ aspiria.controller("IndexController", function ($scope, $http, $compile, $locati
       setTimeout(function () {
         window.location.href = angular.element(this).scope.url;
       }, 2000);
+    }, function error(response) {});
+  };
+
+  $scope.getInfo = function () {
+    $http({
+      method: "GET",
+      url: angular.element(_this).scope.url + "/api/user/info/" + $scope._user_id
+    }).then(function success(response) {
+      $scope.user_info = response.data["user"];
     }, function error(response) {});
   };
 });

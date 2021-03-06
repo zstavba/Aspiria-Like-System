@@ -141,9 +141,16 @@ class UserController extends Controller
 			return $data;
 		}
 
+		
 
-		$array[] = (array) $user->all();
-	
+
+		$array = [
+			"user" => [
+				"data" => $user->all(),
+				"profile" => $user->profile()
+			]
+
+		];
 		return $array;
 	}
 

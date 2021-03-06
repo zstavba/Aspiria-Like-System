@@ -20,7 +20,11 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>        
     </head>
-    <body class="bg-gray-800" ng-controller="IndexController" ng-init="init()">
+    @if(Auth::check())
+      <body class="bg-gray-800" ng-controller="IndexController" ng-init="init('{{ Auth::user()->id }}')">
+    @else
+      <body class="bg-gray-800" ng-controller="IndexController" ng-init="init()">
+    @endif
         <nav class="bg-white shadow">
           <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-16">
@@ -38,7 +42,7 @@
                 <a href="#" class="flex-shrink-0 group block">
                   <div class="flex items-center">
                     <div>
-                      <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=GjrNmFhAQ3&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                      <img class="inline-block h-9 w-9 rounded-full" src="@{{ user_info.profile }}" alt="">
                     </div>
                     <div class="ml-3">
                       <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
