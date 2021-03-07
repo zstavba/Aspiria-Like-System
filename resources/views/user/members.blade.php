@@ -12,7 +12,8 @@
         </svg>
       </button>
     </div>
-    <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none p-4" tabindex="0">
+    <main class="flex-1 relative  overflow-y-auto focus:outline-none p-4" tabindex="0">
+      <div class="grid grid-cols-3 gap-4">
         <div class="rounded rounded-t-lg overflow-hidden shadow max-w-xs my-3 bg-white shadow" ng-repeat="member in members">
             <img src="https://i.imgur.com/dYcYQ7E.png" class="w-full" />
             <div class="flex justify-center -mt-8">
@@ -23,7 +24,7 @@
           </div>
             <div class="flex justify-center pb-3 text-grey-dark">
               <div class="text-center mr-3 border-r pr-3">
-                <h2>0</h2>
+                <h2>@{{ member.image_count }}</h2>
                 <span>Slike</span>
               </div>
               <div class="text-center">
@@ -32,6 +33,7 @@
               </div>
             </div>
         </div>
+
     </main>
   </div>
 </div>

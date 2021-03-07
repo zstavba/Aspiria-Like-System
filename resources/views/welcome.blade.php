@@ -46,7 +46,7 @@
                     </div>
                     <div class="ml-3">
                       <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                        Tom Cook
+                        @{{ user_info.name }}
                       </p>
                       <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
                         View profile
@@ -54,7 +54,7 @@
                     </div>
                   </div>
                 </a>
-                <button type="button" class="inline-flex items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-3 ml-5" ng-click="openModal()">
+                <button type="button" class="inline-flex items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-3 ml-5" ng-click="openModal('.upload_image')">
                 <!-- Heroicon name: solid/plus -->
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
@@ -75,7 +75,7 @@
             </div>
           </div>
         </nav>
-<div class="system_message border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md absolute bottom-2 left-2" role="alert" style="display: none;">
+<div class="system_message z-50 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md absolute bottom-2 left-2" role="alert" style="display: none;">
   <div class="flex">
     <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
     <div>

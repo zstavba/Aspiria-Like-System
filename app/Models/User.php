@@ -45,11 +45,11 @@ class User extends Authenticatable
     ];
 
 
-
+  
 
 
     public function profile(){
-        return  "https://scontent-vie1-1.xx.fbcdn.net/v/t1.0-9/117870052_100911408400911_110259944980544771_o.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=qgRkTsiuKjQAX_utPlC&_nc_ht=scontent-vie1-1.xx&oh=c756e2b85b19362f1379a3259c269b03&oe=60680058";
+        return  "https://www.w3schools.com/howto/img_avatar.png";
     }
 
 

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,8 @@ use App\Http\Controllers\UserController;
 /* Guest functionallity */
 
 
+
+
 Route::group(["prefix" => "user"],function(){
 
 	Route::post('/login', [UserController::class, 'login']);
@@ -31,7 +35,17 @@ Route::group(["prefix" => "user"],function(){
 	Route::get("/members", [UserController::class,"list"]);
 });
 
-/* Authenticated functionallity */
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::group(["prefix" => "album"],function(){
+	Route::post("/image/{user_id}",[AlbumController::class,"uploadImage"]);
+	Route::get("/private/{user_id}",[AlbumController::class,"getPrivateImages"]);
+	Route::get("/all",[AlbumController::class,"list"]);
+	Route::get("/selected/{img_id}",[AlbumController::class,"selectedImage"]);
+	Route::post("/update/{img_id}",[AlbumController::class,"changeImageName"]);
+});
+
+
+Route::group(["prefix" => "like"],function(){
+	Route::post("/up/{img_id}",[LikeController::class,"like_up"]);
+	Route::post("/down/{img_id}",[LikeController::class,"like_down"]);
 });

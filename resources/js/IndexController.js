@@ -1,4 +1,4 @@
-window.aspiria = angular.module('aspiria',["ngRoute"]);
+window.aspiria = angular.module('aspiria',["ngRoute",'ngFileUpload']);
 
 /* Adding link to the script to easy hange for later on  */
 angular.element(this).scope.url =  "http://localhost/aspiria/public";
@@ -34,29 +34,31 @@ aspiria.config(function($routeProvider,$locationProvider) {
 
 
 
-aspiria.controller("IndexController",function($scope, $http, $compile, $location,$interval){
+aspiria.controller("IndexController",function($scope, $http, $compile, $location,$interval,Upload){
 
-	$scope._user_id = 0;
+	$scope._user_id;
 
 	$scope.init = ($user_id = null) => {
 		$scope._user_id = $user_id;
 
 
 		$scope.getInfo();
+		$scope.getPrivateImages();
+		$scope.getAllImages();
 
 	}
 
 	$scope.message = (error_type,message) => {
 		$('.system_message').addClass(error_type);
-		$scope.message = (message.text == undefined) ? message : message.text;
-		$('.system_message .sm_text').html($scope.message);
+		$scope.text_message = (message.text == undefined) ? message : message.text;
+		$('.system_message .sm_text').html($scope.text_message);
 		$('.system_message').fadeIn();
 		setTimeout(function(){
 			$('.system_message').removeClass(error_type);
 			$('.system_message .sm_text').html("");
 			$('.system_message').fadeOut();
 		},4000);
-	 }
+	}
 
 
 
@@ -109,13 +111,14 @@ aspiria.controller("IndexController",function($scope, $http, $compile, $location
 		);
 	}
 
-	$scope.openModal = () => {
-		const modal = document.querySelector('.modal');
+	$scope.openModal = (modal_name) => {
+		const modal = document.querySelector(modal_name);
 		modal.classList.toggle('opacity-0')
 		modal.classList.toggle('pointer-events-none')
 	}
-	$scope.closeModal = () => {
-		const modal = document.querySelector('.modal');
+
+	$scope.closeModal = (modal_name) => {
+		const modal = document.querySelector(modal_name);
 		modal.classList.toggle('opacity-0')
 		modal.classList.toggle('pointer-events-none')
 	}
@@ -155,6 +158,137 @@ aspiria.controller("IndexController",function($scope, $http, $compile, $location
 
 		)
 
+	}
+
+
+
+	$scope.createImage = () => {
+		Upload.upload({
+			method:"POST",
+			url:angular.element(this).scope.url+"/api/album/image/"+$scope._user_id,
+			data:{
+				"image": document.getElementById("image_file").files[0],
+				"title": $('.image_title').val()
+			}
+		}).then(
+			function success(response){
+				$scope.getPrivateImages();
+			},
+			function error(response){
+				
+			}
+
+		);
+
+	}
+
+
+	$scope.getPrivateImages = () => {
+		$http({
+			method:"GET",
+			url: angular.element(this).scope.url+"/api/album/private/"+$scope._user_id
+		}).then(
+			function success(response){
+				$scope.private_images = response.data;
+			},
+			function error(response){
+
+			}
+
+		);
+
+	}
+
+	$scope.getAllImages = () => {
+		$http({
+			method:"GET",
+			url: angular.element(this).scope.url+"/api/album/all/"
+		}).then(
+			function success(response){
+				$scope.images = response.data;
+			},
+			function error(response){
+
+			}
+
+		);
+
+	}
+
+
+
+	$scope.changeName = (image_id) => {
+		$scope.openModal('.edit_name');
+		$http({
+			method:"GET",
+			url: angular.element(this).scope.url+"/api/album/selected/"+image_id
+		}).then(
+			function success(response){
+				$scope.img_info = response.data["image"];
+				$scope.image_title = $scope.img_info.name;
+				$scope.$apply();
+			},
+			function error(response){
+
+			}
+
+		);
+
+	}
+
+
+	$scope.changeImageName = (image_id) => {
+		$http({
+			method:"POST",
+			url: angular.element(this).scope.url+"/api/album/update/"+image_id,
+			data: {
+				"title" : $('.image_update_title').val()
+			}
+		}).then(
+			function success(response){
+				$scope.message("bg-green-100",response.data["message"]);
+			},
+			function error(response){
+				$scope.message("bg-red-200",response.data["message"]);
+			}
+		)
+
+	}
+
+	$scope.likeImage = (image_id) => {
+		$http({
+			method:"POST",
+			url: angular.element(this).scope.url+"/api/like/up/"+$scope._user_id,
+			data : {
+				"image_id": image_id
+			}
+		}).then(
+			function success(response){
+				$scope.getAllImages();
+				$scope.message("bg-green-100",response.data["message"]);
+			},
+			function error(response){
+				$scope.message("bg-red-200",response.data["message"]);
+			}
+		);
+
+	}
+
+	$scope.dislikeImage = (image_id) => {
+		$http({
+			method:"POST",
+			url: angular.element(this).scope.url+"/api/like/down/"+$scope._user_id,
+			data : {
+				"image_id": image_id
+			}
+		}).then(
+			function success(response){
+				$scope.message("bg-green-100",response.data["message"]);
+			},
+			function error(response){
+				$scope.message("bg-red-200",response.data["message"]);
+			}
+		);
 	}
 
 });

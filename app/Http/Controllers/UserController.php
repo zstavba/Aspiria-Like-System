@@ -9,6 +9,7 @@ use Mail;
 
 /* Models list */
 use App\Models\User;
+use App\Models\Images;
 
 
 /* Email list */
@@ -128,9 +129,11 @@ class UserController extends Controller
 		$array = [];
 
 		foreach($users as $user){
+			$images = Images::where('user_id',$user->id)->get();
 			$data = [
 				"name" => $user->name,
-				"profile" => $user->profile()
+				"profile" => $user->profile(),
+				"image_count" => count($images)
 			];
 
 			array_push($array,$data);
@@ -143,8 +146,9 @@ class UserController extends Controller
 	}
 
 
-	public function info($user_id) : array {
+	public function info($user_id) {
 		$user = User::find($user_id);
+		$images = Images::where("user_id",$user_id)->get();
 
 		if(empty($user)){
 			$data = [
@@ -160,13 +164,14 @@ class UserController extends Controller
 
 
 		$array = [
-			"user" => [
-				"data" => $user->all(),
-				"profile" => $user->profile()
-			]
-
+			"id" => $user->id,
+			"name" => $user->name,
+			"profile" => $user->profile(),
+			"image_count" => count($images)
 		];
-		return $array;
+		return response()->json([
+			"user" => $array
+		],200);
 	}
 
 	public function sendMail(User $user){

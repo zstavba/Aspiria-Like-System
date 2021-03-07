@@ -17,6 +17,9 @@ use  App\Http\Controllers\Controller;
 Route::get('/', [Controller::class, 'index']);
 
 
+Route::get('/activation/{user_id}', [Controller::class, 'activation_successfull'])->name("activation");
+
+
 Route::get('/home', [Controller::class, 'home']);
 Route::get('/login', [Controller::class, 'login'])->middleware('guest');
 Route::get('/register', [Controller::class, 'register'])->middleware('guest');;

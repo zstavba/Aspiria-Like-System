@@ -1,11 +1,11 @@
 @if(Auth::check())
 
-  <div class="visible sm:hidden md:flex md:flex-shrink-0">
+  <div class="visible h-screen ">
     <div class="flex flex-col w-64">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white">
-        <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-          <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
+      <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white h-screen">
+        <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto h-screen">
+          <nav class="mt-5 flex-1 px-2 bg-white space-y-1 h-screen">
             <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
             <a href="{{ url('/') }}/#!/" class="bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md hover:text-gray-900 hover:bg-gray-100">
               <!-- Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500" -->
