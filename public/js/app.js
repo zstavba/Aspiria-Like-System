@@ -1840,7 +1840,7 @@ module.exports = {
   \*****************************************/
 /***/ (function() {
 
-var aspiria = angular.module('aspiria', ["ngRoute"]);
+window.aspiria = angular.module('aspiria', ["ngRoute"]);
 /* Adding link to the script to easy hange for later on  */
 
 angular.element(this).scope.url = "http://localhost/aspiria/public";
@@ -1859,7 +1859,7 @@ aspiria.config(function ($routeProvider, $locationProvider) {
   });
   $routeProvider.when("/clani", {
     templateUrl: angular.element(this).scope.url + "/members",
-    controller: "IndexController"
+    controller: "UserController"
   });
   $routeProvider.when("/privat_slike", {
     templateUrl: angular.element(this).scope.url + "/private/images",
@@ -1883,7 +1883,8 @@ aspiria.controller("IndexController", function ($scope, $http, $compile, $locati
 
   $scope.message = function (error_type, message) {
     $('.system_message').addClass(error_type);
-    $('.system_message .sm_text').html(message.text);
+    $scope.message = message.text == undefined ? message : message.text;
+    $('.system_message .sm_text').html($scope.message);
     $('.system_message').fadeIn();
     setTimeout(function () {
       $('.system_message').removeClass(error_type);
@@ -1957,6 +1958,34 @@ aspiria.controller("IndexController", function ($scope, $http, $compile, $locati
       url: angular.element(_this).scope.url + "/api/user/info/" + $scope._user_id
     }).then(function success(response) {
       $scope.user_info = response.data["user"];
+    }, function error(response) {});
+  };
+});
+
+/***/ }),
+
+/***/ "./resources/js/UserController.js":
+/*!****************************************!*\
+  !*** ./resources/js/UserController.js ***!
+  \****************************************/
+/***/ (() => {
+
+aspiria.controller("UserController", function ($scope, $http, $compile, $location, $interval) {
+  var _this = this;
+
+  $scope._user_id = 0;
+
+  $scope.init = function (user_id) {
+    $scope._user_id = user_id;
+    $scope.members();
+  };
+
+  $scope.members = function () {
+    $http({
+      method: "GET",
+      url: angular.element(_this).scope.url + "/api/user/members"
+    }).then(function success(response) {
+      $scope.members = response.data;
     }, function error(response) {});
   };
 });
@@ -12566,7 +12595,7 @@ __webpack_require__(/*! ./route.js */ "./resources/js/route.js");
 
 __webpack_require__(/*! ./IndexController.js */ "./resources/js/IndexController.js");
 
-__webpack_require__(/*! ./routing.js */ "./resources/js/routing.js");
+__webpack_require__(/*! ./UserController.js */ "./resources/js/UserController.js");
 
 /***/ }),
 
@@ -18134,16 +18163,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
     };
   }
 })(window, window.angular);
-
-/***/ }),
-
-/***/ "./resources/js/routing.js":
-/*!*********************************!*\
-  !*** ./resources/js/routing.js ***!
-  \*********************************/
-/***/ (() => {
-
-
 
 /***/ }),
 

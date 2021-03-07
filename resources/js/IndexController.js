@@ -1,4 +1,4 @@
-var aspiria = angular.module('aspiria',["ngRoute"]);
+window.aspiria = angular.module('aspiria',["ngRoute"]);
 
 /* Adding link to the script to easy hange for later on  */
 angular.element(this).scope.url =  "http://localhost/aspiria/public";
@@ -19,7 +19,7 @@ aspiria.config(function($routeProvider,$locationProvider) {
   });
    $routeProvider.when("/clani", {
     templateUrl : angular.element(this).scope.url+"/members",
-    controller: "IndexController"
+    controller: "UserController"
   });
    $routeProvider.when("/privat_slike", {
     templateUrl : angular.element(this).scope.url+"/private/images",
@@ -48,7 +48,8 @@ aspiria.controller("IndexController",function($scope, $http, $compile, $location
 
 	$scope.message = (error_type,message) => {
 		$('.system_message').addClass(error_type);
-		$('.system_message .sm_text').html(message.text);
+		$scope.message = (message.text == undefined) ? message : message.text;
+		$('.system_message .sm_text').html($scope.message);
 		$('.system_message').fadeIn();
 		setTimeout(function(){
 			$('.system_message').removeClass(error_type);

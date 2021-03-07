@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
+use Mail;
 
+/* Models list */
 use App\Models\User;
 
+
+/* Email list */
+
+use App\Mail\AccountActivation;
 
 class UserController extends Controller
 {
@@ -84,7 +90,7 @@ class UserController extends Controller
 
 
 		if($user->save([])){
-
+			$this->sendMail($user);
 			return response()->json([
 				"message" => [
 					"text" => "Vaša registracija je bila uspešna, na mail boste prejeli link za aktivacijo računa.",
@@ -119,7 +125,16 @@ class UserController extends Controller
 		}
 
 
-		$array[] = (array) $users->all();
+		$array = [];
+
+		foreach($users as $user){
+			$data = [
+				"name" => $user->name,
+				"profile" => $user->profile()
+			];
+
+			array_push($array,$data);
+		}
 
 
 		return $array;
@@ -155,7 +170,7 @@ class UserController extends Controller
 	}
 
 	public function sendMail(User $user){
-
+		Mail::to($user->email)->send(new AccountActivation($user));
 	}
 
 
