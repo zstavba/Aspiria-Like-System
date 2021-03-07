@@ -197,7 +197,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td class="esd-block-button es-p20t es-p15b es-p10r es-p10l" align="center"><span class="es-button-border"><a href="https://viewstripo.email/" class="es-button" target="_blank">Potrdite vaš e-naslov</a></span></td>
+                                                                                    <td class="esd-block-button es-p20t es-p15b es-p10r es-p10l" align="center"><span class="es-button-border"><a href="{{ route('activation',['user_id' => $user->id]) }}" class="es-button" target="_blank">Potrdite vaš e-naslov</a></span></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>

@@ -26,5 +26,5 @@ Route::get('/register', [Controller::class, 'register'])->middleware('guest');;
 
 
 Route::get('/private/images', [Controller::class, 'private_images'])->middleware('auth');
-Route::get('/all/images', [Controller::class, 'all_images'])->middleware('auth');
+Route::get('/all/images', [Controller::class, 'all_images']);
 Route::get('/members', [Controller::class, 'members'])->middleware('auth');

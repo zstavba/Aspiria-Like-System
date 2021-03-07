@@ -52,7 +52,8 @@
                         @{{ image.user.name }}
                     </p>
                 </a>
-                <div class="inline-block pull-right" ng-if="image.user.id != {{ Auth::user()->id }}">
+                @if(Auth::check())
+              <div class="inline-block pull-right" ng-if="image.user.id != {{ Auth::user()->id }}">
                     <button type="button" class="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mr-5 text-white" ng-click="dislikeImage(image.id)">
                         <svg width="20" height="20" stroke="currentColor" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 9.5C18 10.3284 17.3285 11 16.5 11C15.6716 11 15 10.3284 15 9.5V3.5C15 2.67157 15.6716 2 16.5 2C17.3285 2 18 2.67157 18 3.5V9.5Z" fill="#fff"/>
@@ -66,7 +67,8 @@
                       </svg>
 
                     </button>
-                </div>  
+                </div>
+                @endif  
             </footer>
         </article>
       </div>
