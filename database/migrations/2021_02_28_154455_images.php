@@ -15,8 +15,8 @@ class Images extends Migration
     {
         Schema::create("images",function(Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('album_id');
-            $table->foreign('album_id')->references('id')->on('album');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string("name")->nullable();
             $table->string("type")->nullable();
             $table->string("size")->nullable();
